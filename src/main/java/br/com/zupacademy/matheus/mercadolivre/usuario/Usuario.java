@@ -2,6 +2,7 @@ package br.com.zupacademy.matheus.mercadolivre.usuario;
 
 import br.com.zupacademy.matheus.mercadolivre.usuario.util.SenhaLimpa;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -25,6 +26,9 @@ public class Usuario {
     public Usuario(){}
 
     public Usuario(String login, SenhaLimpa senhaLimpa) {
+        Assert.hasLength(login, "login não pode ser em branco");
+        Assert.notNull(senhaLimpa, "O objeto do tipo senhaLimpa não pode ser nulo");
+
         this.login = login;
         this.senha = senhaLimpa.encodeSenha();
     }

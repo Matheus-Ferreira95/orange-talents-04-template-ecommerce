@@ -20,7 +20,7 @@ public class UsuarioController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<Void> cadastrar(@RequestBody @Valid CadastroUsuario cadastroUsuario) {
+    public ResponseEntity<Void> cadastrar(@RequestBody @Valid NovoUsuarioRequest cadastroUsuario) {
         Usuario usuario = cadastroUsuario.toModel();
         usuarioRepository.save(usuario);
         return ResponseEntity.ok().build();

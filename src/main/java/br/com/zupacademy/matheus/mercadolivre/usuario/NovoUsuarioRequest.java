@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-public class CadastroUsuario {
+public class NovoUsuarioRequest {
 
     @NotBlank
     @Email
@@ -18,7 +18,7 @@ public class CadastroUsuario {
     @Length(min = 6)
     private String senha;
 
-    public CadastroUsuario(@NotBlank @Email String login, @NotBlank @Length(min = 6) String senha) {
+    public NovoUsuarioRequest(@NotBlank @Email String login, @NotBlank @Length(min = 6) String senha) {
         this.login = login;
         this.senha = senha;
     }
