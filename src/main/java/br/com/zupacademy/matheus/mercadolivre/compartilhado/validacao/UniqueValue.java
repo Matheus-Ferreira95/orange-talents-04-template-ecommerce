@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 public @interface UniqueValue {
 
-    String message() default "Dado já consta como cadastrado.";
+    String message() default "";
 
     Class<?>[] groups() default {};
 
