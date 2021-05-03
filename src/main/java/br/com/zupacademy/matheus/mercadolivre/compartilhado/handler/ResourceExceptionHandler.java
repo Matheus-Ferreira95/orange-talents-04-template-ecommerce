@@ -32,7 +32,7 @@ public class ResourceExceptionHandler {
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(AuthenticationException.class)
-    public FieldMessage handle(AuthenticationException exception){
+    public FieldMessage erroDeAutenticacao(AuthenticationException exception){
         return new FieldMessage("auth", exception.getMessage());
     }
 }
