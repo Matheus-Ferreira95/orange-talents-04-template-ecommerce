@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -27,5 +28,11 @@ public class ResourceExceptionHandler {
             list.add(new FieldMessage(error.getField(), messageSource.getMessage(error, LocaleContextHolder.getLocale())));
         }
         return list;
+    }
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(AuthenticationException.class)
+    public FieldMessage handle(AuthenticationException exception){
+        return new FieldMessage("auth", exception.getMessage());
     }
 }
