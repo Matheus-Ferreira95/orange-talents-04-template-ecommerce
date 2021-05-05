@@ -1,7 +1,5 @@
 package br.com.zupacademy.matheus.mercadolivre.compartilhado.validacao;
 
-import br.com.zupacademy.matheus.mercadolivre.compartilhado.validacao.UniqueValue;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintValidator;
@@ -27,7 +25,6 @@ public class UniqueValueValidation implements ConstraintValidator<UniqueValue, O
                 klass.getName() + " t WHERE " + campo + "=:value", Boolean.class)
                 .setParameter("value", value)
                 .getSingleResult();
-
         return uniqueValue;
     }
 }
