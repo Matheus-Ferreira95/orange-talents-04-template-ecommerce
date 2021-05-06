@@ -3,6 +3,7 @@ package br.com.zupacademy.matheus.mercadolivre.produto;
 import br.com.zupacademy.matheus.mercadolivre.caracteristica.CaracteristicaProduto;
 import br.com.zupacademy.matheus.mercadolivre.caracteristica.NovaCaracteristicaRequest;
 import br.com.zupacademy.matheus.mercadolivre.categoria.Categoria;
+import br.com.zupacademy.matheus.mercadolivre.imagem.ImagemProduto;
 import br.com.zupacademy.matheus.mercadolivre.usuario.Usuario;
 import io.jsonwebtoken.lang.Assert;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,7 +15,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -55,6 +55,9 @@ public class Produto {
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private Set<CaracteristicaProduto> caracteristicas = new HashSet<>();
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+    private Set<ImagemProduto> imagens = new HashSet<>();
 
     @Deprecated
     public Produto() {}
@@ -102,5 +105,17 @@ public class Produto {
                 ", dono=" + dono +
                 ", caracteristicas=" + caracteristicas +
                 '}';
+    }
+
+    public void associaImagens(Set<String> links) {
+        Set<ImagemProduto> imagens = links.stream()
+                .map(link -> new ImagemProduto(this, link))
+                .collect(Collectors.toSet());
+
+        this.imagens.addAll(imagens);
+    }
+
+    public boolean pertenceAoUsuario(Usuario possivelDono) {
+        return dono.equals(possivelDono);
     }
 }
