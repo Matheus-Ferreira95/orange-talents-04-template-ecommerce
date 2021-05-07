@@ -1,9 +1,9 @@
 package br.com.zupacademy.matheus.mercadolivre.produto;
 
-import br.com.zupacademy.matheus.mercadolivre.caracteristica.CaracteristicaProduto;
-import br.com.zupacademy.matheus.mercadolivre.caracteristica.NovaCaracteristicaRequest;
+import br.com.zupacademy.matheus.mercadolivre.produto.caracteristica.CaracteristicaProduto;
+import br.com.zupacademy.matheus.mercadolivre.produto.caracteristica.NovaCaracteristicaRequest;
 import br.com.zupacademy.matheus.mercadolivre.categoria.Categoria;
-import br.com.zupacademy.matheus.mercadolivre.imagem.ImagemProduto;
+import br.com.zupacademy.matheus.mercadolivre.produto.imagem.ImagemProduto;
 import br.com.zupacademy.matheus.mercadolivre.usuario.Usuario;
 import io.jsonwebtoken.lang.Assert;
 import org.hibernate.annotations.CreationTimestamp;

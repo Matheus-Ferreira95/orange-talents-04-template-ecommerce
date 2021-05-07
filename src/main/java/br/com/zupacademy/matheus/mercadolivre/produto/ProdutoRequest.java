@@ -1,6 +1,6 @@
 package br.com.zupacademy.matheus.mercadolivre.produto;
 
-import br.com.zupacademy.matheus.mercadolivre.caracteristica.NovaCaracteristicaRequest;
+import br.com.zupacademy.matheus.mercadolivre.produto.caracteristica.NovaCaracteristicaRequest;
 import br.com.zupacademy.matheus.mercadolivre.categoria.Categoria;
 import br.com.zupacademy.matheus.mercadolivre.compartilhado.validacao.ExistsId;
 import br.com.zupacademy.matheus.mercadolivre.usuario.Usuario;

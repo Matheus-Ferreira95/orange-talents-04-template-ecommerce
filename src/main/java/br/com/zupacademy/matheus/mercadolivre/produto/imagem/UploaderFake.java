@@ -1,4 +1,4 @@
-package br.com.zupacademy.matheus.mercadolivre.imagem;
+package br.com.zupacademy.matheus.mercadolivre.produto.imagem;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;

@@ -23,9 +23,9 @@ public class ExistsIdValidation implements ConstraintValidator<ExistsId, Long> {
             return true;
         }
         Boolean existsId = manager.createQuery("SELECT count(t) > 0 FROM " + klass.getName()
-                                            + " t WHERE t.id =:value", Boolean.class)
-                                            .setParameter("value", value)
-                                            .getSingleResult();
+                + " t WHERE t.id =:value", Boolean.class)
+                .setParameter("value", value)
+                .getSingleResult();
         return existsId;
     }
 }

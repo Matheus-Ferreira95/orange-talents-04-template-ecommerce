@@ -1,4 +1,4 @@
-package br.com.zupacademy.matheus.mercadolivre.imagem;
+package br.com.zupacademy.matheus.mercadolivre.produto.imagem;
 
 import br.com.zupacademy.matheus.mercadolivre.produto.Produto;
 import org.hibernate.validator.constraints.URL;

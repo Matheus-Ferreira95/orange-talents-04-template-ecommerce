@@ -1,4 +1,4 @@
-package br.com.zupacademy.matheus.mercadolivre.caracteristica;
+package br.com.zupacademy.matheus.mercadolivre.produto.caracteristica;
 
 import br.com.zupacademy.matheus.mercadolivre.produto.ProdutoRequest;
 import org.springframework.validation.Errors;

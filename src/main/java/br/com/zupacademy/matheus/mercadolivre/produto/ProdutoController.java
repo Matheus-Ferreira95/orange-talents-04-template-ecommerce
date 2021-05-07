@@ -1,8 +1,8 @@
 package br.com.zupacademy.matheus.mercadolivre.produto;
 
-import br.com.zupacademy.matheus.mercadolivre.caracteristica.ProibeCaracteristicaComNomeIgualValidator;
-import br.com.zupacademy.matheus.mercadolivre.imagem.NovasImagensRequest;
-import br.com.zupacademy.matheus.mercadolivre.imagem.Uploader;
+import br.com.zupacademy.matheus.mercadolivre.produto.caracteristica.ProibeCaracteristicaComNomeIgualValidator;
+import br.com.zupacademy.matheus.mercadolivre.produto.imagem.NovasImagensRequest;
+import br.com.zupacademy.matheus.mercadolivre.produto.imagem.Uploader;
 import br.com.zupacademy.matheus.mercadolivre.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
