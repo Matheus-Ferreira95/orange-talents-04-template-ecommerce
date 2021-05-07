@@ -6,12 +6,12 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestControllerAdvice
@@ -20,19 +20,36 @@ public class ResourceExceptionHandler {
     @Autowired
     private MessageSource messageSource;
 
-    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public List<FieldMessage> erroDeValidacao(MethodArgumentNotValidException ex) {
-        List<FieldMessage> list = new ArrayList<>();
-        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            list.add(new FieldMessage(error.getField(), messageSource.getMessage(error, LocaleContextHolder.getLocale())));
-        }
-        return list;
+    public ValidationErrorsOutputDto handleValidationError(MethodArgumentNotValidException exception) {
+
+        List<ObjectError> globalErrors = exception.getBindingResult().getGlobalErrors();
+        List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
+
+        return buildValidationErrors(globalErrors,
+                fieldErrors);
+    }
+
+    private ValidationErrorsOutputDto buildValidationErrors(List<ObjectError> globalErrors, List<FieldError> fieldErrors) {
+        ValidationErrorsOutputDto validationErrors = new ValidationErrorsOutputDto();
+
+        globalErrors.forEach(error -> validationErrors.addError(getErrorMessage(error)));
+
+        fieldErrors.forEach(error -> {
+            String errorMessage = getErrorMessage(error);
+            validationErrors.addFieldError(error.getField(), errorMessage);
+        });
+        return validationErrors;
+    }
+
+    private String getErrorMessage(ObjectError error) {
+        return messageSource.getMessage(error, LocaleContextHolder.getLocale());
     }
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(AuthenticationException.class)
-    public FieldMessage erroDeAutenticacao(AuthenticationException exception){
-        return new FieldMessage("auth", exception.getMessage());
+    public FieldErrorOutputDto erroDeAutenticacao(AuthenticationException exception){
+        return new FieldErrorOutputDto("auth", exception.getMessage());
     }
 }

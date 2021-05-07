@@ -1,11 +1,11 @@
 package br.com.zupacademy.matheus.mercadolivre.compartilhado.handler;
 
-public class FieldMessage {
+public class FieldErrorOutputDto {
 
     private String campo;
     private String mensagem;
 
-    public FieldMessage(String campo, String mensagem) {
+    public FieldErrorOutputDto(String campo, String mensagem) {
         this.campo = campo;
         this.mensagem = mensagem;
     }
