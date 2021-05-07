@@ -4,6 +4,7 @@ import br.com.zupacademy.matheus.mercadolivre.produto.caracteristica.Caracterist
 import br.com.zupacademy.matheus.mercadolivre.produto.caracteristica.NovaCaracteristicaRequest;
 import br.com.zupacademy.matheus.mercadolivre.categoria.Categoria;
 import br.com.zupacademy.matheus.mercadolivre.produto.imagem.ImagemProduto;
+import br.com.zupacademy.matheus.mercadolivre.produto.pergunta.Pergunta;
 import br.com.zupacademy.matheus.mercadolivre.usuario.Usuario;
 import io.jsonwebtoken.lang.Assert;
 import org.hibernate.annotations.CreationTimestamp;
@@ -17,10 +18,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -59,6 +57,9 @@ public class Produto {
     @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
     private Set<ImagemProduto> imagens = new HashSet<>();
 
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<Pergunta> perguntas = new ArrayList<>();
+
     @Deprecated
     public Produto() {}
 
@@ -77,6 +78,10 @@ public class Produto {
         this.caracteristicas.addAll(novasCaracteristicas);
 
         Assert.isTrue(this.caracteristicas.size() >= 3, "Todo produto precisa ter no mínimo 3 caracteristicas");
+    }
+
+    public Usuario getDono() {
+        return dono;
     }
 
     @Override
@@ -117,5 +122,9 @@ public class Produto {
 
     public boolean pertenceAoUsuario(Usuario possivelDono) {
         return dono.equals(possivelDono);
+    }
+
+    public void associaPergunta(Pergunta pergunta) {
+        perguntas.add(pergunta);
     }
 }
