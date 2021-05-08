@@ -4,6 +4,7 @@ import br.com.zupacademy.matheus.mercadolivre.produto.caracteristica.Caracterist
 import br.com.zupacademy.matheus.mercadolivre.produto.caracteristica.NovaCaracteristicaRequest;
 import br.com.zupacademy.matheus.mercadolivre.categoria.Categoria;
 import br.com.zupacademy.matheus.mercadolivre.produto.imagem.ImagemProduto;
+import br.com.zupacademy.matheus.mercadolivre.produto.opiniao.Opiniao;
 import br.com.zupacademy.matheus.mercadolivre.produto.pergunta.Pergunta;
 import br.com.zupacademy.matheus.mercadolivre.usuario.Usuario;
 import io.jsonwebtoken.lang.Assert;
@@ -60,6 +61,9 @@ public class Produto {
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private List<Pergunta> perguntas = new ArrayList<>();
 
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<Opiniao> opinioes = new ArrayList<>();
+
     @Deprecated
     public Produto() {}
 
@@ -82,6 +86,34 @@ public class Produto {
 
     public Usuario getDono() {
         return dono;
+    }
+
+    public Set<ImagemProduto> getImagens() {
+        return imagens;
+    }
+
+    public Set<CaracteristicaProduto> getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public List<Opiniao> getOpinioes() {
+        return opinioes;
+    }
+
+    public List<Pergunta> getPerguntas() {
+        return perguntas;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 
     @Override
@@ -126,5 +158,11 @@ public class Produto {
 
     public void associaPergunta(Pergunta pergunta) {
         perguntas.add(pergunta);
+    }
+
+    public double calculaMediaAvaliacao() {
+        return opinioes.stream()
+                .mapToDouble(opiniao -> opiniao.getNota())
+                .average().orElse(0.0);
     }
 }
